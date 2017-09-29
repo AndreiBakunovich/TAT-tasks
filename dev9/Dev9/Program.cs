@@ -13,15 +13,18 @@ namespace Dev9
         {
             string[] lines = new string[2];
             string path = @"c:\Users\source.txt";
-            try {
+            try
+            {
                 lines = File.ReadAllLines(path);
-                if (lines[0] == String.Empty || lines[1] == String.Empty){
+                if (lines[0] == String.Empty || lines[1] == String.Empty)
+                {
                     Console.WriteLine("Incorrect file data format");
                     Console.ReadLine();
                     return;
                 }
             }
-            catch {
+            catch
+            {
                 Console.WriteLine("Incorrect file data format.");
                 Console.ReadLine();
                 return;
@@ -32,13 +35,30 @@ namespace Dev9
             lineOneInChar = lines[0].ToCharArray();
             lineTwoInChar = lines[1].ToCharArray();
 
+            //random string selection
             string result;
             Replacer rep = new Replacer();
-            //random string selection
             Random rnd = new Random();
             if (rnd.Next(1, 3) == 1)
-                result = rep.ReplacingPartsInStrings(lineOneInChar, lineTwoInChar);
-            else result = rep.ReplacingPartsInStrings(lineTwoInChar, lineOneInChar);
+            {
+                
+                int lineTwoIntervalStart = rnd.Next(0, lineTwoInChar.Length),
+                    lineTwoIntervalFinish = rnd.Next(lineTwoIntervalStart + 1, lineTwoInChar.Length),
+                    lineOneIntervalStart = rnd.Next(0, lineOneInChar.Length),
+                    lineOneIntervalFinish = rnd.Next(lineOneIntervalStart + 1, lineOneInChar.Length);
+                result = rep.ReplacingPartsInStrings(lineOneInChar, lineOneIntervalStart, lineOneIntervalFinish,
+                    lineTwoInChar, lineTwoIntervalStart, lineTwoIntervalFinish);
+            }
+            else
+            {
+                
+                int lineOneIntervalStart = rnd.Next(0, lineOneInChar.Length),
+                    lineOneIntervalFinish = rnd.Next(lineOneIntervalStart + 1, lineOneInChar.Length),
+                    lineTwoIntervalStart = rnd.Next(0, lineTwoInChar.Length),
+                    lineTwoIntervalFinish = rnd.Next(lineTwoIntervalStart + 1, lineTwoInChar.Length);
+                result = rep.ReplacingPartsInStrings(lineTwoInChar, lineTwoIntervalStart, lineTwoIntervalFinish,
+                    lineOneInChar, lineOneIntervalStart, lineOneIntervalFinish);
+            }
 
             Console.WriteLine("First line: " + lines[0]);
             Console.WriteLine("Second line: " + lines[1]);

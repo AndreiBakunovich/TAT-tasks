@@ -8,26 +8,20 @@ namespace Dev9
 {
     class Replacer
     {
-        public string ReplacingPartsInStrings(char[] recipient, char[] donor)
+        //dividion lines on parts
+        public string ReplacingPartsInStrings(char[] recipient,int recipientIntervalStart, int recipientIntervalFinish,
+            char[] donor, int donorIntervalStart, int donorIntervalFinish)
         {
             string res = String.Empty;
-            //dividion lines on parts
             Random rnd = new Random();
 
-            int donorIntervalStart = rnd.Next(0, donor.Length),
-                donorIntervalFinish = rnd.Next(donorIntervalStart, donor.Length),
-                recipientIntervalStart = rnd.Next(0, recipient.Length),
-                recipientIntervalFinish = rnd.Next(recipientIntervalStart, recipient.Length);
-            
             //result configuring
-            for (int i = 0; i < recipientIntervalStart; i++)
-                res = res + recipient[i];
-
-            for (int i = donorIntervalStart; i < donorIntervalFinish; i++)
-                res = res + donor[i];
-
-            for (int i = recipientIntervalFinish; i < recipient.Length; i++)
-                res = res + recipient[i];
+            string resipientString = new string(recipient);
+            string donorString = new string(donor);
+            
+            res = String.Concat(res, resipientString.Substring(0, recipientIntervalStart));
+            res = String.Concat(res, donorString.Substring(donorIntervalStart, donorIntervalFinish - donorIntervalStart));
+            res = String.Concat(res, resipientString.Substring(recipientIntervalFinish, resipientString.Length - recipientIntervalFinish));
 
             return res;
         }
