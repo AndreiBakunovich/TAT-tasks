@@ -18,11 +18,10 @@ namespace Dev9
             //result configuring
             string resipientString = new string(recipient);
             string donorString = new string(donor);
-            
+
             res = String.Concat(res, resipientString.Substring(0, recipientIntervalStart));
             res = String.Concat(res, donorString.Substring(donorIntervalStart, donorIntervalFinish - donorIntervalStart));
             res = String.Concat(res, resipientString.Substring(recipientIntervalFinish, resipientString.Length - recipientIntervalFinish));
-
             return res;
         }
     }
