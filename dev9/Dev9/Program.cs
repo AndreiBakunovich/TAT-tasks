@@ -41,7 +41,7 @@ namespace Dev9
             Random rnd = new Random();
             if (rnd.Next(1, 3) == 1)
             {
-                
+
                 int lineTwoIntervalStart = rnd.Next(0, lineTwoInChar.Length),
                     lineTwoIntervalFinish = rnd.Next(lineTwoIntervalStart + 1, lineTwoInChar.Length),
                     lineOneIntervalStart = rnd.Next(0, lineOneInChar.Length),
@@ -51,7 +51,7 @@ namespace Dev9
             }
             else
             {
-                
+
                 int lineOneIntervalStart = rnd.Next(0, lineOneInChar.Length),
                     lineOneIntervalFinish = rnd.Next(lineOneIntervalStart + 1, lineOneInChar.Length),
                     lineTwoIntervalStart = rnd.Next(0, lineTwoInChar.Length),

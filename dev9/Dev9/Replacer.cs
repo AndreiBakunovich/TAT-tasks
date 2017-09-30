@@ -13,7 +13,6 @@ namespace Dev9
             char[] donor, int donorIntervalStart, int donorIntervalFinish)
         {
             string res = String.Empty;
-            Random rnd = new Random();
 
             //result configuring
             string resipientString = new string(recipient);
