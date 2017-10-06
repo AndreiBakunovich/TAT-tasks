@@ -9,8 +9,8 @@ namespace Dev11
 {
     class Program
     {
-        private const string pathAlpabetCyrillicToLatin = @"c:\Users\CirillicToLatin.txt";
-        private const string pathAlpabetLatinToCyrillic = @"c:\Users\LatinToCirillic.txt";
+        private const string pathAlpabetCyrillicToLatin = @"c:\Users\CirillicToLatinAlpabet.txt";
+        private const string pathAlpabetLatinToCyrillic = @"c:\Users\LatinToCirillicAlpabet.txt";
         private const string path = @"c:\Users\source.txt";
 
         static void Main( string[] args )
