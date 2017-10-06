@@ -60,22 +60,22 @@ namespace Dev11
                     data [ i - 1 ] == 'и' || data [ i - 1 ] == 'э' || data [ i - 1 ] == 'я' ||
                     data [ i - 1 ] == 'ю' || data [ i - 1 ] == 'ь' || data [ i - 1 ] == 'ъ'))
                 {
-                    alphabetTransCyrillicToLatin.TryGetValue( ( data[ i - 1 ] + data[ i ] ).ToString(), out helpSymbol ); 
+                    alphabetTransCyrillicToLatin.TryGetValue( ( data[ i - 1 ].ToString() + data[ i ].ToString()), out helpSymbol ); 
                     result.Append ( helpSymbol );
                     continue;
                 }
                 if ( i != 0 && data [ i ] == 'я' && data [ i - 1 ] == 'ь')
                 {
-                    alphabetTransCyrillicToLatin.TryGetValue( ( data[ i - 1 ] + data [ i ] ).ToString(), out helpSymbol );
+                    alphabetTransCyrillicToLatin.TryGetValue( ( data[ i - 1 ].ToString() + data [ i ].ToString() ), out helpSymbol );
                     result.Append ( helpSymbol );
                     continue;
                 }
-                if ( i != ( data.Length - 1) && i > 1 && (data [ i ] == 'и' || data [ i ] == 'ы') && data [ i + 1 ] == 'й' && 
+                if (( i != ( data.Length - 1)) && i > 1 && ( data [ i ] == 'и' || data [ i ] == 'ы') && data [ i + 1 ] == 'й' && 
                     !alphabetTransCyrillicToLatin.ContainsKey( data [ i + 1 ].ToString() ) )
                 {
-                    alphabetTransCyrillicToLatin.TryGetValue ( ( data [ i ] + data [ i + 1 ] ).ToString(), out helpSymbol );
+                    alphabetTransCyrillicToLatin.TryGetValue ( ( data [ i ].ToString() + data [ i + 1 ].ToString() ), out helpSymbol );
                     result.Append ( helpSymbol );
-                    i++;
+                    i += 2;
                     continue;
                 }
 
