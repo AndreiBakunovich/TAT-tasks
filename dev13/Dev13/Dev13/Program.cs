@@ -10,24 +10,24 @@ namespace Dev13
 {
     class Program
     {
-        public static int InputHandler(string inputValueName)
+        public static int InputHandler ( string inputValueName )
         {
-            Console.WriteLine("Enter your {0}.", inputValueName);
+            Console.WriteLine ( "Enter your {0}.", inputValueName );
             bool inputCorrect = false;
             int input = 0;
             do
             {
                 try
                 {
-                    input = Convert.ToInt32(Console.ReadLine());
+                    input = Convert.ToInt32 ( Console.ReadLine() );
                     inputCorrect = true;
                 }
                 catch
                 {
-                    Console.WriteLine("Input line incorrect. Please, reenter {0}.", inputValueName);
+                    Console.WriteLine ( "Input line incorrect. Please, reenter {0}.", inputValueName );
                 }
             }
-            while (!inputCorrect);
+            while ( !inputCorrect );
             return input;
         }
 
@@ -42,13 +42,13 @@ namespace Dev13
 
             int productivity = 0;
             inputValueName = "productivity";
-            if ( criterion != 1)
+            if ( criterion != 1 )
             {
                 productivity = InputHandler ( inputValueName ) ;
             }
 
             ICriterion criterionAlgorithm;
-            switch (criterion)
+            switch ( criterion )
             {
                 case 1:
                     {

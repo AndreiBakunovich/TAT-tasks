@@ -19,17 +19,19 @@ namespace Dev13
         {
             this.criterionSelectWorkers = criterion;
             pathToExistingProfessionsFile = @"f:\Test\TAT-tasks\dev13\Dev13\Dev13\Workers.txt";
-            FormingDictionaryFromFile();
+            FormingParametersFromFile();
         }
 
-        private void FormingDictionaryFromFile()
+        private void FormingParametersFromFile()
         {
             try
             {
                 string[] readData = File.ReadAllLines ( pathToExistingProfessionsFile );
 
-                int numOfProfessions = Convert.ToInt32 ( readData [ readData.Length ] );
+                int numOfProfessions = Convert.ToInt32 ( readData [ readData.Length - 1 ] );
                 existingProfessions = new int [ numOfProfessions ][];
+                professionsNames = new string [ numOfProfessions ];
+
                 for ( int i = 0 ; i < numOfProfessions ; i++ )
                 {
                     int[] positionParams = new int [ 2 ] ;
@@ -39,10 +41,11 @@ namespace Dev13
                                                readData [ i ].IndexOf ( ' ', readData [ i ].IndexOf ( ' ' ) + 1) - 
                                                ( readData [ i ].IndexOf ( ' ' ) + 1 ) );
 
-                    string productivitt = readData [ i ].Substring ( readData [ i ].IndexOf ( ' ' , readData [ i ].IndexOf ( ' ' ) + 1 ) + 1,
+                    string productivity = readData [ i ].Substring ( readData [ i ].IndexOf ( ' ' , readData [ i ].IndexOf ( ' ' ) + 1 ) + 1,
                                                 readData [ i ].Length - ( readData [ i ].IndexOf ( ' ' , readData [ i ].IndexOf(' ') + 1) + 1));
+
                     positionParams [ 0 ] = Convert.ToInt32 ( salary );
-                    positionParams [ 0 ] = Convert.ToInt32 ( productivitt );
+                    positionParams [ 1 ] = Convert.ToInt32 ( productivity );
 
                     existingProfessions [ i ] = positionParams;
                     professionsNames [ i ] = nameOfPosition;
@@ -52,30 +55,28 @@ namespace Dev13
             {
                 Console.WriteLine ( "Something goes wrong. Check file format." );
             }
-
         }
 
         public void FormTeam ( int budgetOfProgect , int productivity )
         {
-            lastFormedTeam = criterionSelectWorkers.SelectTeam ( existingProfessions , productivity );
+            lastFormedTeam = criterionSelectWorkers.SelectTeam ( existingProfessions , productivity , budgetOfProgect );
             return;
         }
 
         public void PrintLastFormedTeam()
         {
-            if (lastFormedTeam.Length == 1)
+            if ( lastFormedTeam.Max() == 0 )
             {
                 Console.WriteLine ( "You is very poor for such progect. Please contact the Indian programmers. " );
             }
             else
             {
                 Console.WriteLine ( "Team for progect:" );
-                for ( int i = 0 ; i < existingProfessions.Length ; i++ )
+                for ( int i = 0 ; i < existingProfessions.GetLength ( 0 ) ; i++ )
                 {
-                    Console.WriteLine ( " Count of {0}s is {1}. ", existingProfessions [ i ] , lastFormedTeam [ i ] );
+                    Console.WriteLine ( " Count of {0}s is {1}. ", professionsNames [ i ] , lastFormedTeam [ i ] );
                 }
             }
         }
-
     }
 }
