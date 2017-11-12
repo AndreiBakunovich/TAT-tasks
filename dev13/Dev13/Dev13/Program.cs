@@ -10,29 +10,30 @@ namespace Dev13
 {
     class Program
     {
+        // for catch wrong input values
         public static int InputHandler ( string inputValueName )
         {
-            Console.WriteLine ( "Enter your {0}.", inputValueName );
+            Console.WriteLine ( "Enter your {0}." , inputValueName );
             bool inputCorrect = false;
             int input = 0;
             do
             {
                 try
                 {
-                    input = Convert.ToInt32 ( Console.ReadLine() );
+                    input = Convert.ToInt32 ( Console.ReadLine () );
                     inputCorrect = true;
                 }
                 catch
                 {
-                    Console.WriteLine ( "Input line incorrect. Please, reenter {0}.", inputValueName );
+                    Console.WriteLine ( "Input line incorrect. Please, reenter {0}." , inputValueName );
                 }
             }
             while ( !inputCorrect );
             return input;
         }
 
-        //pattern strategy had been used heare
-        static void Main ( string[] args )
+        //pattern 'strategy' had been used heare
+        static void Main ( string [] args )
         {
             string inputValueName = "budget";
             int budget = InputHandler ( inputValueName );
@@ -44,7 +45,7 @@ namespace Dev13
             inputValueName = "productivity";
             if ( criterion != 1 )
             {
-                productivity = InputHandler ( inputValueName ) ;
+                productivity = InputHandler ( inputValueName );
             }
 
             ICriterion criterionAlgorithm;
@@ -52,27 +53,30 @@ namespace Dev13
             {
                 case 1:
                     {
-                        criterionAlgorithm = new FirstCriterion();
+                        criterionAlgorithm = new FirstCriterion ();
                         break;
                     }
                 case 2:
                     {
-                        criterionAlgorithm = new SecondCriterion();
+                        criterionAlgorithm = new SecondCriterion ();
                         break;
                     }
                 default:
                     {
-                        criterionAlgorithm = new ThirdCriterion();
+                        criterionAlgorithm = new ThirdCriterion ();
                         break;
                     }
             };
 
             Company EPAM = new Company ( criterionAlgorithm );
 
+            // relise choosed algorithm
             EPAM.FormTeam ( budget , productivity );
-            EPAM.PrintLastFormedTeam();
 
-            Console.ReadLine();
+            //print desigion on console
+            EPAM.PrintLastFormedTeam ();
+
+            Console.ReadLine ();
         }
     }
 }

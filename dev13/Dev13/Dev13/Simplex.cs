@@ -6,21 +6,48 @@ using System.Threading.Tasks;
 
 namespace Dev13
 {
+
+    /*
+        system of limitations:
+        a11 * x1 + a12 * x2 + ... + a1n * xn <= b1
+        a21 * x1 + a22 * x2 + ... + a2n * xn <= b2
+        .
+        .
+        .
+        am1 * x1 + am2 * x2 + ... + amn * xn <= bm
+
+        objective function:
+        z = c1 * x1 + c2 * x2 + ... + cn * xn
+
+        input array format:
+        {
+        { b1 , a11 , a12 , ... , a1n },
+        { b2 , a21 , a22 , ... , a2n },
+        .
+        .
+        .
+        { bm , am1 , am2 , ... , amn },
+        { 0  , -c1 , -c2 , ... , -cn }
+        }
+
+        output is array with final array 
+    */
+
     public class Simplex
     {
         //source - simplex table without basis variables
-        double[,] table; //simplex table
+        double [,] table; //simplex table
 
         int m, n;
 
         List<int> basis; //list of basis varisbles
 
-        public Simplex ( double[,] source )
+        public Simplex ( double [,] source )
         {
             m = source.GetLength ( 0 );
             n = source.GetLength ( 1 );
-            table = new double[ m , n + m - 1 ];
-            basis = new List<int>();
+            table = new double [ m , n + m - 1 ];
+            basis = new List<int> ();
 
             for ( int i = 0 ; i < m ; i++ )
             {
@@ -43,17 +70,17 @@ namespace Dev13
         }
 
         //result - heare will be result X
-        public double[,] Calculate ( double[] result )
+        public double [,] Calculate ( double [] result )
         {
-            int mainCol , mainRow; //Lead line and colomn
+            int mainCol, mainRow; //Lead line and colomn
 
-            while ( !IsItEnd())
+            while ( !IsItEnd () )
             {
-                mainCol = findMainCol();
+                mainCol = findMainCol ();
                 mainRow = findMainRow ( mainCol );
                 basis [ mainRow ] = mainCol;
 
-                double[,] new_table = new double [ m , n ];
+                double [,] new_table = new double [ m , n ];
 
                 for ( int j = 0 ; j < n ; j++ )
                     new_table [ mainRow , j ] = table [ mainRow , j ] / table [ mainRow , mainCol ];
@@ -82,7 +109,7 @@ namespace Dev13
             return table;
         }
 
-        private bool IsItEnd()
+        private bool IsItEnd ()
         {
             bool flag = true;
 
@@ -98,7 +125,7 @@ namespace Dev13
             return flag;
         }
 
-        private int findMainCol()
+        private int findMainCol ()
         {
             int mainCol = 1;
 
@@ -121,7 +148,8 @@ namespace Dev13
                 }
 
             for ( int i = mainRow + 1 ; i < m - 1 ; i++ )
-                if ( ( table [ i , mainCol ] > 0 ) && ( ( table [ i , 0 ] / table [ i , mainCol ] ) < ( table [ mainRow , 0 ] / table [ mainRow , mainCol ] ) ) )
+                if ( ( table [ i , mainCol ] > 0 ) && 
+                    ( ( table [ i , 0 ] / table [ i , mainCol ] ) < ( table [ mainRow , 0 ] / table [ mainRow , mainCol ] ) ) )
                     mainRow = i;
 
             return mainRow;

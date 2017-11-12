@@ -8,6 +8,6 @@ namespace Dev13
 {
     interface ICriterion
     {
-        int[] SelectTeam ( int[][] parametersOfProgrrammers , int productivity , int budget);
+        int [] SelectTeam ( int [] [] parametersOfProgrrammers , int productivity , int budget );
     }
 }
