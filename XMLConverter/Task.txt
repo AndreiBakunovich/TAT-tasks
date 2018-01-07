@@ -1,0 +1,1 @@
+Implement XML document parser to a DOM like object which contains all information from the target xml file. Do not use standard parsers.
