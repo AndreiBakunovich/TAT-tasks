@@ -1,0 +1,6 @@
+Junior 100 100
+Middle 300 250
+Senior 600 550
+Lead 800 1000
+//name_salary_productivity_:_Number_on_the_end_is_count_of_professions//
+4
